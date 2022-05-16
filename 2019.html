@@ -27,6 +27,7 @@
   <body>
     <div id="container">
       <div id="header">ACT Senate preference flows in 2019</div>
+      <div id="subhead">First preferences to two-candidate preferred (Seselja vs Kyburz)</div>
       <svg id="chart">
         <g id="chartGroup"></g>
       </svg>
@@ -41,64 +42,87 @@
       chart = d3.select("#chart");
       chartGroup = d3.select("#chartGroup");
 
-      // set up chart basics
-      sankey = d3.sankey()
-        .nodePadding(16)
-        .nodeSort(d3.descending);
-      path = sankey.links();
+      // load the data
+      d3.json("./data/sankey_data.json")
+        .then(function(data) {
+          loadedData = data;
 
-      // draw chart only after fonts are loaded
-      if (document.fonts.status == "loaded") {
-        drawChart();
-      } else {
-        document.fonts.onloadingdone = drawChart();
-      }
+          // set up chart basics
+          sankey = d3.sankey()
+            .nodePadding(16)
+            .nodeSort(d3.descending);
+          path = sankey.links();
 
-      function drawChart() {
-        // load the data
-        d3.json("./data/sankey_data.json")
-          .then(function(data) {
-            // chart dimensions
-            dimensions = chart.node().getBoundingClientRect();
-            width = dimensions.width;
-            height = dimensions.height;
-            marginBottom = 10;
-            chartGroup.attr("transform", "translate(0, 0)");
+          // draw chart only after fonts are loaded
+          window.addEventListener("resize", resize);
+          if (document.fonts.status == "loaded") {
+            resize();
+          } else {
+            document.fonts.onloadingdone = resize();
+          }
+        });
 
-            // udpate chart
-            sankey.nodeWidth((width < 500 ? 32 : 48))
-              .size([width, height - marginBottom]);
+      function resize() {
+        // chart dimensions
+        dimensions = chart.node().getBoundingClientRect();
+        width = dimensions.width;
+        height = dimensions.height;
+        marginBottom = 10;
+        chartGroup.attr("transform", "translate(0, 0)");
 
-            // transform data
-            chartData = sankey(data);
+        // udpate chart
+        sankey.nodeWidth((width < 500 ? 32 : 48))
+          .size([width, height - marginBottom]);
 
-            links = chartGroup
-              .selectAll(".link")
-                .data(chartData.links)
-              .enter().append("path")
-                .attr("class", function(d) { return d.party + " link"; })
-                .attr("d", d3.sankeyLinkHorizontal())
-                .attr("stroke-width", function(d) { return d.width; });;
+        // transform data
+        chartData = sankey(loadedData);
 
-            nodes = chartGroup
-              .selectAll(".node")
-                .data(chartData.nodes)
-              .enter().append("g")
-                .attr("class", function(d) { return d.party.replace(" ", "") + " node"; });
-            nodes.append("rect")
-              .attr("x", function(d) { return d.x0; })
-              .attr("y", function(d) { return d.y0; })
-              .attr("height", function(d) { return d.y1 - d.y0; })
-              .attr("width", sankey.nodeWidth());
-            nodes.append("text")
-              .attr("x", function(d) { return d.x0 - 8; })
-              .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
-              .attr("dy", ".3rem")
-              .text(function(d) { return d.name; })
-            .filter(function(d) { return d.x0 < width / 2; })
-              .attr("x", function(d) { return d.x1 + 8; })
-              .style("text-anchor", "start");
-          });
+        // draw chart
+        links = chartGroup
+          .selectAll(".link")
+            .data(chartData.links);
+        links.exit()
+          .remove();
+        links.enter()
+          .append("path")
+            .attr("class", function(d) { return d.party + " link"; })
+            .attr("d", d3.sankeyLinkHorizontal())
+            .attr("stroke-width", function(d) { return d.width; });
+        links.attr("d", d3.sankeyLinkHorizontal())
+          .attr("stroke-width", function(d) { return d.width; });
+
+        nodes = chartGroup
+          .selectAll(".node")
+            .data(chartData.nodes);
+        nodes.exit()
+          .remove();
+        nodesEnter = nodes.enter()
+          .append("g")
+            .attr("class", function(d) { return d.party.replace(" ", "") + " node"; });
+        nodesEnter.append("rect")
+          .attr("x", function(d) { return d.x0; })
+          .attr("y", function(d) { return d.y0; })
+          .attr("height", function(d) { return d.y1 - d.y0; })
+          .attr("width", sankey.nodeWidth());
+        nodesEnter.append("text")
+          .attr("x", function(d) { return d.x0 - 8; })
+          .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
+          .attr("dy", ".3rem")
+          .text(function(d) { return d.name; })
+        .filter(function(d) { return d.x0 < width / 2; })
+          .attr("x", function(d) { return d.x1 + 8; })
+          .style("text-anchor", "start");
+        nodes.select("rect")
+          .attr("x", function(d) { return d.x0; })
+          .attr("y", function(d) { return d.y0; })
+          .attr("height", function(d) { return d.y1 - d.y0; })
+          .attr("width", sankey.nodeWidth());
+        nodes.select("text")
+          .attr("x", function(d) { return d.x0 - 8; })
+          .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
+        .filter(function(d) { return d.x0 < width / 2; })
+          .attr("x", function(d) { return d.x1 + 8; })
+          .style("text-anchor", "start");
       }
     </script>
   </body>

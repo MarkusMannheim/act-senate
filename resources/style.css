@@ -28,14 +28,17 @@ body {
   flex-flow: column;
 }
 #header {
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   font-size: 20px;
   font-family: ABCSansNovaBlack, "Arial Black", Helvetica, sans-serif;
 }
+#subhead {
+  margin-bottom: 14px;
+  font-family: ABCSansNovaLight, "Arial Narrow", Helvetica, sans-serif;
+}
 #footer {
   font-family: ABCSansNovaLight, "Arial Narrow", Helvetica, sans-serif;
-  margin-top: 20px;
-  font-style: italic;
+  margin-top: 10px;
   font-size: 12px;
   color: #888;
 }

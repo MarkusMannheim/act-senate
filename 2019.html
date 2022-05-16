@@ -138,6 +138,9 @@
         .filter(function(d) { return d.x0 < width / 2; })
           .attr("x", function(d) { return d.x1 + 8; })
           .style("text-anchor", "start");
+        nodesEnter.select(".value")
+          .attr("x", function(d) { return d.x0 + sankey.nodeWidth() / 2; })
+          .attr("y", function(d) { return (d.y1 + d.y0) / 2; });
       }
     </script>
   </body>

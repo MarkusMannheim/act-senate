@@ -82,7 +82,7 @@ body {
   text-shadow: 1px 1px 2px white;
   text-anchor: end;
 }
-.node .value {
+.node .digit {
   text-anchor: middle;
   fill: white;
   text-shadow: 1px 1px 2px #001533;
@@ -129,7 +129,7 @@ body {
   .node .label {
     text-shadow: 2px 2px 4px white;
   }
-  .node .value {
+  .node .digit {
     text-shadow: 2px 2px 5px #001533;
   }
 }

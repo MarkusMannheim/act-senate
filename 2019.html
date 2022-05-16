@@ -121,7 +121,7 @@
           .attr("x", function(d) { return d.x1 + (width > 800 ? 16 : 8); })
           .style("text-anchor", "start");
         nodesEnter.append("text")
-          .classed("value", true)
+          .classed("digit", true)
           .attr("x", function(d) { return d.x0 + sankey.nodeWidth() / 2; })
           .attr("y", function(d) { return (d.y1 + d.y0) / 2 + (width > 800 ? 10 : 5); })
           .text(function(d) { return d3.format(".1%")(d.value); });
@@ -136,7 +136,7 @@
         .filter(function(d) { return d.x0 < width / 2; })
           .attr("x", function(d) { return d.x1 + (width > 800 ? 16 : 8); })
           .style("text-anchor", "start");
-        nodesEnter.select(".value")
+        nodes.select(".digit")
           .attr("x", function(d) { return d.x0 + sankey.nodeWidth() / 2; })
           .attr("y", function(d) { return (d.y1 + d.y0) / 2 + (width > 800 ? 10 : 5); });
       }

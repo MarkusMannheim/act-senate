@@ -139,6 +139,8 @@
         nodes.select(".digit")
           .attr("x", function(d) { return d.x0 + sankey.nodeWidth() / 2; })
           .attr("y", function(d) { return (d.y1 + d.y0) / 2 + (width > 800 ? 10 : 5); });
+
+        d3.timeout(resize, 1000);
       }
     </script>
   </body>

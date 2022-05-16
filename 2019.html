@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155991615-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+      gtag("config", "UA-155991615-1");
+    </script>
+
+    <!-- metaphysics -->
+    <meta charset="utf-8">
+    <title>ACT Senate voting 2019</title>
+    <meta name="author" content="Markus Mannheim">
+    <meta name="keywords" content="data, act, canberra, senate, votes, voting, election, 2019, preferences, distribution">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- scripts -->
+    <script src="./resources/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/d3-sankey@0"></script>
+    <link href="./resources/style.css" rel="stylesheet">
+    <link href="./resources/abcLogo64.png" rel="icon">
+  </head>
+
+  <body>
+    <div id="container">
+      <div id="header">Preference flows in 2019</div>
+      <svg id="chart">
+        <g id="chartGroup"></g>
+      </svg>
+      <div id="footer">Chart: Markus Mannheim | Source: Australian Electoral Commission</div>
+    </div>
+
+    <script>
+      // page elements, variables
+      container = d3.select("#container");
+      header = d3.select("#header");
+      footer = d3.select("#footer");
+      chart = d3.select("#chart");
+      chartGroup = d3.select("#chartGroup");
+
+      // set up chart basics
+      sankey = d3.sankey()
+        .nodePadding(16)
+        .nodeSort(d3.descending);
+      path = sankey.links();
+
+      // draw chart only after fonts are loaded
+      if (document.fonts.status == "loaded") {
+        drawChart();
+      } else {
+        document.fonts.onloadingdone = drawChart();
+      }
+
+      function drawChart() {
+        // load the data
+        d3.json("./data/sankey_data.json")
+          .then(function(data) {
+            // chart dimensions
+            dimensions = chart.node().getBoundingClientRect();
+            width = dimensions.width;
+            height = dimensions.height;
+            marginBottom = 10;
+            chartGroup.attr("transform", "translate(0, 0)");
+
+            // udpate chart
+            sankey.nodeWidth((width < 500 ? 32 : 48))
+              .size([width, height - marginBottom]);
+
+            // transform data
+            chartData = sankey(data);
+
+            links = chartGroup
+              .selectAll(".link")
+                .data(chartData.links)
+              .enter().append("path")
+                .attr("class", function(d) { return d.party + " link"; })
+                .attr("d", d3.sankeyLinkHorizontal())
+                .attr("stroke-width", function(d) { return d.width; });;
+
+            nodes = chartGroup
+              .selectAll(".node")
+                .data(chartData.nodes)
+              .enter().append("g")
+                .attr("class", function(d) { return d.party.replace(" ", "") + " node"; });
+            nodes.append("rect")
+              .attr("x", function(d) { return d.x0; })
+              .attr("y", function(d) { return d.y0; })
+              .attr("height", function(d) { return d.y1 - d.y0; })
+              .attr("width", sankey.nodeWidth());
+            nodes.append("text")
+              .attr("x", function(d) { return d.x0 - 8; })
+              .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
+              .attr("dy", ".3rem")
+              .text(function(d) { return d.name; })
+            .filter(function(d) { return d.x0 < width / 2; })
+              .attr("x", function(d) { return d.x1 + 8; })
+              .style("text-anchor", "start");
+          });
+      }
+    </script>
+  </body>
+</html>

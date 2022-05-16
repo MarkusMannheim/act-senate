@@ -1,0 +1,87 @@
+@font-face {
+ font-family: ABCSansNovaRegular;
+ src: url(../fonts/ABCSansNova-Regular.otf);
+}
+@font-face {
+ font-family: ABCSansNovaBlack;
+ src: url(../fonts/ABCSansNova-Black.otf);
+}
+@font-face {
+ font-family: ABCSansNovaLight;
+ src: url(../fonts/ABCSansNova-Light.otf);
+}
+:root {
+  font-size: 1em;
+  font-family: ABCSansNovaRegular, Helvetica, sans-serif;
+  color: #001533;
+}
+body {
+  margin: 0;
+  overflow: hidden;
+}
+#container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+}
+#header {
+  margin-bottom: 14px;
+  font-size: 20px;
+  font-family: ABCSansNovaBlack, "Arial Black", Helvetica, sans-serif;
+}
+#footer {
+  margin-top: 20px;
+  font-style: italic;
+  font-size: 12px;
+  color: #888;
+}
+#chart {
+  height: 100%
+}
+.link {
+  fill: none;
+  stroke: #757575;
+  stroke-opacity: .2;
+}
+.link:hover {
+  stroke-opacity: .5;
+}
+.node rect {
+  fill: #757575;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+.Labor rect {
+  fill: #e11f30;
+}
+.Liberals rect {
+  fill: #0a52bf;
+}
+.Greens rect {
+  fill: #51a802;
+}
+.AnthonyPesec rect {
+  fill: #00a1c7;
+}
+.UnitedAustralia rect {
+  fill: #cc8500;
+}
+.node text {
+  font-size: .9rem;
+  pointer-events: none;
+  text-shadow: 2px 2px 2px white;
+  text-anchor: end;
+}
+
+@media only screen and (max-width: 500px) {
+ .node text {
+   font-size: .75rem;
+ }
+ #header {
+   margin-bottom: 10px;
+   font-size: 18px;
+ }
+}

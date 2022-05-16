@@ -33,6 +33,7 @@ body {
   font-family: ABCSansNovaBlack, "Arial Black", Helvetica, sans-serif;
 }
 #footer {
+  font-family: ABCSansNovaLight, "Arial Narrow", Helvetica, sans-serif;
   margin-top: 20px;
   font-style: italic;
   font-size: 12px;

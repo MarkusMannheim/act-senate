@@ -46,10 +46,18 @@
       d3.json("./data/sankey_data.json")
         .then(function(data) {
           loadedData = data;
+          totalVotes = Math.round(d3.sum(loadedData.links.map(function(d) {
+            return d.value;
+          })));
+          loadedData.links = loadedData.links
+            .map(function(d) {
+              d.value = d.value / totalVotes;
+              return d;
+            });
 
           // set up chart basics
           sankey = d3.sankey()
-            .nodePadding(16)
+            .nodePadding(12)
             .nodeSort(d3.descending);
           path = sankey.links();
 
@@ -71,7 +79,7 @@
         chartGroup.attr("transform", "translate(0, 0)");
 
         // udpate chart
-        sankey.nodeWidth((width < 500 ? 32 : 48))
+        sankey.nodeWidth((width < 500 ? 48 : 64))
           .size([width, height - marginBottom]);
 
         // transform data
@@ -105,6 +113,7 @@
           .attr("height", function(d) { return d.y1 - d.y0; })
           .attr("width", sankey.nodeWidth());
         nodesEnter.append("text")
+          .classed("label", true)
           .attr("x", function(d) { return d.x0 - 8; })
           .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
           .attr("dy", ".3rem")
@@ -112,12 +121,18 @@
         .filter(function(d) { return d.x0 < width / 2; })
           .attr("x", function(d) { return d.x1 + 8; })
           .style("text-anchor", "start");
+        nodesEnter.append("text")
+          .classed("value", true)
+          .attr("x", function(d) { return d.x0 + sankey.nodeWidth() / 2; })
+          .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
+          .attr("dy", ".3rem")
+          .text(function(d) { return d3.format(".1%")(d.value); });
         nodes.select("rect")
           .attr("x", function(d) { return d.x0; })
           .attr("y", function(d) { return d.y0; })
           .attr("height", function(d) { return d.y1 - d.y0; })
           .attr("width", sankey.nodeWidth());
-        nodes.select("text")
+        nodes.select(".label")
           .attr("x", function(d) { return d.x0 - 8; })
           .attr("y", function(d) { return (d.y1 + d.y0) / 2; })
         .filter(function(d) { return d.x0 < width / 2; })

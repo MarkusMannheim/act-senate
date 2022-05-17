@@ -41,6 +41,7 @@
       footer = d3.select("#footer");
       chart = d3.select("#chart");
       chartGroup = d3.select("#chartGroup");
+      loadTarget = document.querySelector("#chart");
 
       // load the data
       d3.json("./data/sankey_data.json")
@@ -62,14 +63,17 @@
 
           // draw chart only after fonts are loaded
           window.addEventListener("resize", resize);
-          if (document.fonts.status == "loaded") {
-            resize();
-          } else {
-            document.fonts.onloadingdone = resize();
-          }
+          observer = new IntersectionObserver(loadFrame, {
+            threshold: 1
+          });
+          loaded = false;
+          observer.observe(loadTarget);
         });
 
       function resize() {
+        // signal initial draw
+        loaded = true;
+
         // chart dimensions
         dimensions = chart.node().getBoundingClientRect();
         width = dimensions.width;
@@ -102,8 +106,9 @@
         nodes = chartGroup
           .selectAll(".node")
             .data(chartData.nodes);
-        nodes.exit()
-          .remove();
+        // remove vacant objects
+        nodes.exit().remove();
+        // initial objects layout
         nodesEnter = nodes.enter()
           .append("g")
             .attr("class", function(d) { return d.party.replace(" ", "") + " node"; });
@@ -125,22 +130,35 @@
           .attr("x", function(d) { return d.x0 + sankey.nodeWidth() / 2; })
           .attr("y", function(d) { return (d.y1 + d.y0) / 2 + (width > 800 ? 10 : 5); })
           .text(function(d) { return d3.format(".1%")(d.value); });
+        //  update existing objects
         nodes.select("rect")
           .attr("x", function(d) { return d.x0; })
           .attr("y", function(d) { return d.y0; })
           .attr("height", function(d) { return d.y1 - d.y0; })
           .attr("width", sankey.nodeWidth());
+        nodes.selectAll("text")
+          .attr("y", function(d) { return (d.y1 + d.y0) / 2 + (width > 800 ? 10 : 5); });
         nodes.select(".label")
           .attr("x", function(d) { return d.x0 - (width > 800 ? 16 : 8); })
-          .attr("y", function(d) { return (d.y1 + d.y0) / 2 + (width > 800 ? 10 : 5); })
         .filter(function(d) { return d.x0 < width / 2; })
           .attr("x", function(d) { return d.x1 + (width > 800 ? 16 : 8); })
           .style("text-anchor", "start");
         nodes.select(".digit")
-          .attr("x", function(d) { return d.x0 + sankey.nodeWidth() / 2; })
-          .attr("y", function(d) { return (d.y1 + d.y0) / 2 + (width > 800 ? 10 : 5); });
+          .attr("x", function(d) { return d.x0 + sankey.nodeWidth() / 2; });
+      }
 
-        d3.timeout(resize, 1000);
+      function loadFrame(interactionObjects) {
+        interactionObjects.map(function(object) {
+          if (!loaded) {
+            if (document.fonts.status == "loaded") {
+              if (object.isIntersecting) {
+                resize();
+              }
+            } else {
+              document.fonts.onloadingdone = resize();
+            }
+          }
+        });
       }
     </script>
   </body>

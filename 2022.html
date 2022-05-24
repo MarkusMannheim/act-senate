@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155991615-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+      gtag("config", "UA-155991615-1");
+    </script>
+
+    <!-- metaphysics -->
+    <meta charset="utf-8">
+    <title>ACT Senate results</title>
+    <meta name="author" content="Markus Mannheim">
+    <meta name="keywords" content="data, act, canberra, senate, votes, voting, election, 2022">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- scripts -->
+    <script src="./resources/d3.v7.min.js"></script>
+    <link href="./resources/2022.css" rel="stylesheet">
+    <link href="./resources/abcLogo64.png" rel="icon">
+  </head>
+
+  <body>
+    <div id="container">
+      <div id="header">Latest ACT Senate results</div>
+      <div id="subhead"></div>
+      <div id="quotaLabel">quota</div>
+      <div id="chart">
+        <div id="quotaLine"></div>
+      </div>
+      <div id="footer">Chart: Markus Mannheim | Source: Australian Electoral Commission</div>
+    </div>
+
+    <script>
+      // page elements, variables
+      container = d3.select("#container");
+      header = d3.select("#header");
+      subhead = d3.select("#subhead");
+      footer = d3.select("#footer");
+      chart = d3.select("#chart");
+      quotaLine = d3.select("#quotaLine");
+      quotaLabel = d3.select("#quotaLabel");
+      loadTarget = document.querySelector("#footer");
+      parties = {
+        LP: 'Liberal',
+        ALP: 'Labor',
+        AJP: 'Animal Justice',
+        AUP: 'Progressives',
+        DAVI: 'David Pocock',
+        IMO: 'Informed Medical Options',
+        KCBR: 'Kim for Canberra',
+        HMP: 'Legalise Cannabis',
+        SPP: 'Sustainable Australia',
+        GRN: 'Greens',
+        UAPP: 'United Australia',
+        UNAM: 'other'
+        }
+      // load the data
+      d3.csv("./data/latest_results.csv")
+        .then(function(data) {
+          loadedData = data;
+          notes = loadedData.pop();
+          loadedData = loadedData
+            .map(function(d) {
+              return {
+                ab: (d.GroupAb == "UNAM" ? "UNG" : d.GroupAb),
+                party: parties[d.GroupAb],
+                result: +d.TotalPercentage
+              };
+            });
+          loadedData.sort(function(a, b) {
+            return d3.descending(a.result, b.result);
+          });
+          votesCounted = d3.format(".1%")(+notes["TotalPercentage"]);
+          updated = d3.timeFormat("%-I:%M %p, %b %-d")(new Date(notes["GroupNm"]));
+          subhead.text("First-preference votes at " + updated + " (" + votesCounted + " of votes counted)");
+
+          // set up chart basics
+          resultRows = chart
+            .selectAll(".resultRow")
+              .data(loadedData)
+            .enter().append("div")
+              .attr("class", function(d) { return d.ab + " resultRow"; });
+          resultRows.append("div")
+            .classed("start", true);
+          resultRows.append("div")
+            .classed("result", true);
+          resultRows.select(".start")
+            .append("p")
+              .classed("label", true)
+              .text(function(d) { return d.party; });
+          resultRows.select(".start")
+            .append("p")
+              .classed("label", true)
+              .classed("vote", true)
+              .text(function(d) { return d3.format(".1%")(d.result / 100); });
+          resultScale = d3.scaleLinear()
+            .domain([0, 35]);
+
+          // draw chart only after fonts are loaded
+          window.addEventListener("resize", resize);
+          observer = new IntersectionObserver(loadFrame, {
+            threshold: 1
+          });
+          loaded = false;
+          observer.observe(loadTarget);
+        });
+
+      function resize() {
+        // signal initial draw
+        loaded = true;
+
+        // chart dimensions
+        dimensions = chart.node().getBoundingClientRect();
+        width = dimensions.width;
+        height = dimensions.height;
+        startWidth = document.querySelector(".start").getBoundingClientRect().width;
+        quotaWidth = quotaLabel.node().getBoundingClientRect().width;
+        resultScale.range([startWidth, width]);
+
+        // draw chart
+        resultRows.select(".result")
+          .style("width", function(d) { return resultScale(d.result) + "px"; });
+        quotaLine.style("height", height + "px")
+          .style("right", resultScale(5 / 3) + "px");
+        quotaLabel.style("top", (dimensions.top - (width < 500 ? 20 : 24)) + "px")
+          .style("right", (resultScale(5 / 3) - quotaWidth / 2) + "px");
+        resultRows.select(".vote")
+          .style("left", function(d) {
+            let nodeWidth = this.getBoundingClientRect().width;
+            let nodeResult = resultScale(d.result);
+            let labelPosition = this.parentNode.querySelector(".label").getBoundingClientRect().right;
+            if (nodeResult - 24 - nodeWidth > labelPosition) {
+              return (nodeResult - nodeWidth) + "px";
+            } else {
+              return (labelPosition + 16) + "px";
+            };
+          });
+      }
+
+      function loadFrame(interactionObjects) {
+        interactionObjects.map(function(object) {
+          if (!loaded) {
+            if (document.fonts.status == "loaded") {
+              if (object.isIntersecting) {
+                resize();
+              }
+            } else {
+              document.fonts.onloadingdone = resize();
+            }
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

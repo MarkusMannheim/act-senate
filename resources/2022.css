@@ -1,0 +1,130 @@
+@font-face {
+ font-family: ABCSansNovaRegular;
+ src: url(../fonts/ABCSansNova-Regular.otf);
+}
+@font-face {
+ font-family: ABCSansNovaBlack;
+ src: url(../fonts/ABCSansNova-Black.otf);
+}
+@font-face {
+ font-family: ABCSansNovaLight;
+ src: url(../fonts/ABCSansNova-Light.otf);
+}
+:root {
+  font-size: 1em;
+  font-family: ABCSansNovaRegular, Helvetica, sans-serif;
+  color: #001533;
+}
+body {
+  margin: 0;
+  overflow: hidden;
+}
+#container {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+}
+#header {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-family: ABCSansNovaBlack, "Arial Black", Helvetica, sans-serif;
+}
+#subhead {
+  margin-bottom: 30px;
+  font-family: ABCSansNovaLight, "Arial Narrow", Helvetica, sans-serif;
+}
+#footer {
+  font-family: ABCSansNovaLight, "Arial Narrow", Helvetica, sans-serif;
+  margin-top: 14px;
+  font-size: 12px;
+  color: #888;
+}
+#chart {
+  height: 100%
+}
+.resultRow {
+  width: 100%;
+  height: 2.5rem;
+  margin-bottom: .4rem;
+  display: flex;
+  justify-content: flex-start;
+  background: rgba(132, 149, 169, .15);
+}
+.resultRow:last-child {
+  margin-bottom: 0;
+}
+.start {
+  background: #757575;
+  width: .5rem;
+}
+.result {
+  background: #757575;
+  opacity: .25;
+}
+.ALP .start, .ALP .result {
+  background: #e11f30;
+}
+.LP .start, .LP .result {
+  background: #0a52bf;
+}
+.GRN .start, .GRN .result {
+  background: #51a802;
+}
+.DAVI .start, .DAVI .result {
+  background: #00a1c7;
+}
+.UAPP .start, .UAPP .result {
+  background: #cc8500;
+}
+.KCBR .start, .KCBR .result {
+  background: #9359b3;
+}
+.label {
+  margin: 0;
+  font-weight: bold;
+  position: absolute;
+  line-height: 2.5rem;
+  left: 1rem;
+}
+.vote {
+  font-size: .9rem;
+  font-weight: normal;
+}
+#quotaLabel {
+  color: #68788e;
+  font-family: ABCSansNovaLight, "Arial Narrow", Helvetica, sans-serif;
+  font-size: .9rem;
+  position: absolute;
+}
+#quotaLine {
+  position: absolute;
+  border-left: dashed 1px #68788e;
+}
+
+@media only screen and (max-width: 500px) {
+  .node text {
+    font-size: .75rem;
+  }
+  #header {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  #subhead {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+  .resultRow {
+    height: 2rem;
+    margin-bottom: .3rem;
+  }
+  .label {
+    line-height: 2rem;
+    font-size: .9rem;
+  }
+  .vote {
+    font-size: .8rem;
+  }
+  #quotaLabel {
+    font-size: .8rem;
+  }
+}

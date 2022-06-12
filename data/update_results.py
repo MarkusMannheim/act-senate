@@ -1,4 +1,4 @@
-import pandas as pd, numpy as np
+import pandas as pd
 
 votes = pd.read_csv(
     "https://tallyroom.aec.gov.au/Downloads/SenateInformalByStateDownload-27966.txt",

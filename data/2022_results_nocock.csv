@@ -1,22 +1,22 @@
-code,PartyNm,PartyAb,candidateName,first preferences,Gallagher (elected),Gallagher (quota),Seselja,Goreng Goreng,exhausted
-L,Australian Labor Party,ALP,GALLAGHER Katy,114076,114076,95012,8134.648704647653,28282.312641227563,1778.038654124783
-M,Australian Labor Party,ALP,NORTHAM Maddy,675,502,0,48.0,111.0,14.0
-N,Sustainable Australia Party - Stop Overdevelopment / Corruption,SPP,ANGEL Joy,2317,738,0,534.0,862.0,183.0
-O,Sustainable Australia Party - Stop Overdevelopment / Corruption,SPP,HAYDON John,99,31,0,30.0,30.0,8.0
-P,United Australia Party,UAPP,SAVOULIDIS James,6825,1234,0,3762.0,836.0,993.0
-Q,United Australia Party,UAPP,PAGE Tracey,136,15,0,75.0,22.0,24.0
-R,Liberal,LP,SESELJA Zed,76108,0,0,76108.0,0.0,0.0
-S,Liberal,LP,LAM Kacey,1341,297,0,897.0,101.0,46.0
-V,Kim for Canberra,KCBR,RUBENSTEIN Kim,31257,12450,0,3788.0,14307.0,712.0
-W,Kim for Canberra,KCBR,HUYNH Kim,272,115,0,40.0,109.0,8.0
-X,Australian Progressives,AUP,FAULKNER Therese,1183,350,0,163.0,611.0,59.0
-Y,Australian Progressives,AUP,LIN Stephen,68,25,0,7.0,28.0,8.0
-Z,The Greens,GRN,GORENG GORENG Tjanara,38439,0,0,0.0,38439.0,0.0
-a,The Greens,GRN,CRUZ James,771,123,0,14.0,633.0,1.0
-b,Legalise Cannabis Australia,HMP,KATELARIS Andrew,6201,1898,0,1344.0,2331.0,628.0
-c,Legalise Cannabis Australia,HMP,STANVIC Michelle,89,22,0,16.0,36.0,15.0
-d,Animal Justice Party,AJP,del VALLE Yana,2653,693,0,461.0,1237.0,262.0
-e,Animal Justice Party,AJP,FAHIZ Jannah,53,15,0,10.0,26.0,2.0
-f,Informed Medical Options Party,IMO,SIMMS Michael,1706,290,0,548.0,401.0,467.0
-g,Informed Medical Options Party,IMO,LIDDICOAT Mary-Jane,105,24,0,30.0,27.0,24.0
-h,Independent,IND,LI Fuxin,658,309,0,116.0,200.0,33.0
+code,PartyNm,PartyAb,candidateName,first preferences,Gallagher (elected 1st),Seselja (elected 2nd),Goreng Goreng,exhausted
+L,Australian Labor Party,ALP,GALLAGHER Katy,114076,95012,3925.570321540026,14441.553210140608,696.876468319366
+M,Australian Labor Party,ALP,NORTHAM Maddy,675,0,139.0,500.0,36.0
+N,Sustainable Australia Party - Stop Overdevelopment / Corruption,SPP,ANGEL Joy,2317,0,793.0,1222.0,302.0
+O,Sustainable Australia Party - Stop Overdevelopment / Corruption,SPP,HAYDON John,99,0,37.0,49.0,13.0
+P,United Australia Party,UAPP,SAVOULIDIS James,6825,0,4414.0,1128.0,1283.0
+Q,United Australia Party,UAPP,PAGE Tracey,136,0,83.0,27.0,26.0
+R,Liberal,LP,SESELJA Zed,76108,0,76108.0,0.0,0.0
+S,Liberal,LP,LAM Kacey,1341,0,1038.0,212.0,91.0
+V,Kim for Canberra,KCBR,RUBENSTEIN Kim,31257,0,6296.0,23549.0,1412.0
+W,Kim for Canberra,KCBR,HUYNH Kim,272,0,65.0,192.0,15.0
+X,Australian Progressives,AUP,FAULKNER Therese,1183,0,259.0,819.0,105.0
+Y,Australian Progressives,AUP,LIN Stephen,68,0,15.0,35.0,18.0
+Z,The Greens,GRN,GORENG GORENG Tjanara,38439,0,0.0,38439.0,0.0
+a,The Greens,GRN,CRUZ James,771,0,28.0,734.0,9.0
+b,Legalise Cannabis Australia,HMP,KATELARIS Andrew,6201,0,1976.0,3101.0,1124.0
+c,Legalise Cannabis Australia,HMP,STANVIC Michelle,89,0,19.0,53.0,17.0
+d,Animal Justice Party,AJP,del VALLE Yana,2653,0,672.0,1574.0,407.0
+e,Animal Justice Party,AJP,FAHIZ Jannah,53,0,15.0,36.0,2.0
+f,Informed Medical Options Party,IMO,SIMMS Michael,1706,0,658.0,488.0,560.0
+g,Informed Medical Options Party,IMO,LIDDICOAT Mary-Jane,105,0,36.0,35.0,34.0
+h,Independent,IND,LI Fuxin,658,0,220.0,374.0,64.0

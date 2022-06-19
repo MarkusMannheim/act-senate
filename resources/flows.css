@@ -1,0 +1,135 @@
+@font-face {
+ font-family: ABCSansNovaRegular;
+ src: url(../fonts/ABCSansNova-Regular.otf);
+}
+@font-face {
+ font-family: ABCSansNovaBlack;
+ src: url(../fonts/ABCSansNova-Black.otf);
+}
+@font-face {
+ font-family: ABCSansNovaLight;
+ src: url(../fonts/ABCSansNova-Light.otf);
+}
+:root {
+  font-size: 1em;
+  font-family: ABCSansNovaRegular, Helvetica, sans-serif;
+  color: #001533;
+}
+body {
+  margin: 0;
+  overflow: hidden;
+}
+#container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+}
+#header {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-family: ABCSansNovaBlack, "Arial Black", Helvetica, sans-serif;
+}
+#subhead {
+  margin-bottom: 14px;
+  font-family: ABCSansNovaLight, "Arial Narrow", Helvetica, sans-serif;
+}
+#footer {
+  font-family: ABCSansNovaLight, "Arial Narrow", Helvetica, sans-serif;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #888;
+}
+#chart {
+  height: 100%
+}
+.link {
+  fill: none;
+  stroke: #757575;
+  stroke-opacity: .2;
+}
+.link:hover {
+  stroke-opacity: .5;
+}
+.node rect {
+  fill: #757575;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+.ALP rect {
+  fill: #e11f30;
+}
+.LP rect {
+  fill: #0a52bf;
+}
+.GRN rect {
+  fill: #51a802;
+}
+.DAVI rect {
+  fill: #00a1c7;
+}
+.UAPP rect {
+  fill: #cc8500;
+}
+.node text {
+  font-size: .9rem;
+  pointer-events: none;
+}
+.node .label {
+  pointer-events: none;
+  text-shadow: 1px 1px 2px white;
+  text-anchor: end;
+}
+.node .digit {
+  text-anchor: middle;
+  fill: white;
+  text-shadow: 1px 1px 2px #001533;
+}
+
+@media only screen and (max-width: 500px) {
+ .node text {
+   font-size: .75rem;
+ }
+ #header {
+   margin-bottom: 10px;
+   font-size: 18px;
+ }
+ #subhead {
+   font-size: 15px;
+ }
+}
+
+@media only screen and (min-width: 800px) {
+  body {
+    overflow: auto;
+  }
+  #container {
+    position: relative;
+    margin: 2rem auto;
+    width: 1000px;
+    height: 1600px;
+  }
+  #header {
+    margin-bottom: 20px;
+    font-size: 40px;
+  }
+  #subhead {
+    margin-bottom: 24px;
+    font-size: 2rem;
+  }
+  #footer {
+    margin-top: 20px;
+    font-size: 25px;
+  }
+  .node text {
+    font-size: 1.8rem;
+  }
+  .node .label {
+    text-shadow: 2px 2px 4px white;
+  }
+  .node .digit {
+    text-shadow: 2px 2px 5px #001533;
+  }
+}

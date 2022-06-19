@@ -1,0 +1,25 @@
+code,PartyNm,PartyAb,btl,candidateName,first,ALP,LP,GRN,exhausted
+A,Liberal,LP,False,SESELJA Zed,0,0,0,0,0
+B,The Greens,GRN,False,KYBURZ Penny,0,0,0,0,0
+C,Anthony Pesec,Anthony Pesec,False,PESEC Anthony,0,0,0,0,0
+D,FRASER ANNING'S CONSERVATIVE NATIONAL PARTY,FACN,False,VAN DUREN Shane,0,0,0,0,0
+E,United Australia Party,UAPP,False,WALTER Peter,0,0,0,0,0
+F,Sustainable Australia,SPP,False,HAYDON John,0,0,0,0,0
+G,Australian Labor Party,ALP,False,GALLAGHER Katy,0,0,0,0,0
+H,Liberal,LP,True,SESELJA Zed,84846,0,84846,0,0
+I,Liberal,LP,True,GUNNING Robert,2650,669,1567,361,53
+J,The Greens,GRN,True,KYBURZ Penny,45916,0,0,45916,0
+K,The Greens,GRN,True,DAVIDSON Emma,1978,163,13,1801,1
+L,Anthony Pesec,Anthony Pesec,True,PESEC Anthony,12359,5090,2712,4312,245
+M,Anthony Pesec,Anthony Pesec,True,KENT Gary,212,66,55,88,3
+N,FRASER ANNING'S CONSERVATIVE NATIONAL PARTY,FACN,True,VAN DUREN Shane,2392,498,1564,281,49
+O,FRASER ANNING'S CONSERVATIVE NATIONAL PARTY,FACN,True,BIRKETT Scott,72,16,43,11,2
+P,United Australia Party,UAPP,True,WALTER Peter,5985,1681,2970,1190,144
+Q,United Australia Party,UAPP,True,HODGSON Rebecah Elen,160,40,85,31,4
+R,Sustainable Australia,SPP,True,HAYDON John,4169,1351,910,1855,53
+S,Sustainable Australia,SPP,True,ANGEL Joy,288,96,35,154,3
+T,Australian Labor Party,ALP,True,GALLAGHER Katy,105019,105019,0,0,0
+U,Australian Labor Party,ALP,True,WAITES Nancy,1332,1087,38,203,4
+V,Independent,IND,True,HOUSTON Nick,1322,503,269,531,19
+W,Independent,IND,True,COWTON Gary,301,129,55,113,4
+X,Christian Democratic Party (Fred Nile Group),CDP,True,KIM David,1230,239,886,91,14

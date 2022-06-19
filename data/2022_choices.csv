@@ -1,0 +1,35 @@
+code,PartyNm,PartyAb,btl,candidateName
+A,Australian Labor Party,ALP,False,GALLAGHER Katy
+B,Sustainable Australia Party - Stop Overdevelopment / Corruption,SPP,False,ANGEL Joy
+C,United Australia Party,UAPP,False,SAVOULIDIS James
+D,Liberal,LP,False,SESELJA Zed
+E,David Pocock,DAVI,False,POCOCK David
+F,Kim for Canberra,KCBR,False,RUBENSTEIN Kim
+G,Australian Progressives,AUP,False,FAULKNER Therese
+H,The Greens,GRN,False,GORENG GORENG Tjanara
+I,Legalise Cannabis Australia,HMP,False,KATELARIS Andrew
+J,Animal Justice Party,AJP,False,del VALLE Yana
+K,Informed Medical Options Party,IMO,False,SIMMS Michael
+L,Australian Labor Party,ALP,True,GALLAGHER Katy
+M,Australian Labor Party,ALP,True,NORTHAM Maddy
+N,Sustainable Australia Party - Stop Overdevelopment / Corruption,SPP,True,ANGEL Joy
+O,Sustainable Australia Party - Stop Overdevelopment / Corruption,SPP,True,HAYDON John
+P,United Australia Party,UAPP,True,SAVOULIDIS James
+Q,United Australia Party,UAPP,True,PAGE Tracey
+R,Liberal,LP,True,SESELJA Zed
+S,Liberal,LP,True,LAM Kacey
+T,David Pocock,DAVI,True,POCOCK David
+U,David Pocock,DAVI,True,DOUBE Clare
+V,Kim for Canberra,KCBR,True,RUBENSTEIN Kim
+W,Kim for Canberra,KCBR,True,HUYNH Kim
+X,Australian Progressives,AUP,True,FAULKNER Therese
+Y,Australian Progressives,AUP,True,LIN Stephen
+Z,The Greens,GRN,True,GORENG GORENG Tjanara
+a,The Greens,GRN,True,CRUZ James
+b,Legalise Cannabis Australia,HMP,True,KATELARIS Andrew
+c,Legalise Cannabis Australia,HMP,True,STANVIC Michelle
+d,Animal Justice Party,AJP,True,del VALLE Yana
+e,Animal Justice Party,AJP,True,FAHIZ Jannah
+f,Informed Medical Options Party,IMO,True,SIMMS Michael
+g,Informed Medical Options Party,IMO,True,LIDDICOAT Mary-Jane
+h,Independent,IND,True,LI Fuxin

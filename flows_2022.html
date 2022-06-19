@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155991615-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+      gtag("config", "UA-155991615-1");
+    </script>
+
+    <!-- metaphysics -->
+    <meta charset="utf-8">
+    <title>ACT Senate voting 2022</title>
+    <meta name="author" content="Markus Mannheim">
+    <meta name="keywords" content="data, act, canberra, senate, votes, voting, election, 2022, preferences, distribution">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- scripts -->
+    <script src="./resources/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/d3-sankey@0"></script>
+    <link href="./resources/flows.css" rel="stylesheet">
+    <link href="./resources/abcLogo64.png" rel="icon">
+  </head>
+
+  <body>
+    <div id="container">
+      <div id="header">How the votes flowed</div>
+      <div id="subhead">From first preferences to the final three candidates</div>
+      <svg id="chart">
+        <g id="chartGroup"></g>
+      </svg>
+      <div id="footer">Chart: Markus Mannheim | Source: Australian Electoral Commission</div>
+    </div>
+
+    <script>
+      // page elements, variables
+      container = d3.select("#container");
+      header = d3.select("#header");
+      footer = d3.select("#footer");
+      chart = d3.select("#chart");
+      chartGroup = d3.select("#chartGroup");
+      loadTarget = document.querySelector("#footer");
+
+      // load the data
+      d3.json("./data/sankey_data_2022.json")
+        .then(function(data) {
+          loadedData = data;
+          totalVotes = 285217;
+          loadedData.links = loadedData.links
+            .map(function(d) {
+              d.value = d.value / totalVotes;
+              return d;
+            });
+
+          // set up chart basics
+          sankey = d3.sankey()
+            .nodeSort(d3.descending);
+          path = sankey.links();
+
+          // draw chart only after fonts are loaded
+          window.addEventListener("resize", resize);
+          observer = new IntersectionObserver(loadFrame, {
+            threshold: 1
+          });
+          loaded = false;
+          observer.observe(loadTarget);
+        });
+
+      function resize() {
+        // signal initial draw
+        loaded = true;
+
+        // chart dimensions
+        dimensions = chart.node().getBoundingClientRect();
+        width = dimensions.width;
+        height = dimensions.height;
+        marginBottom = 10;
+        chartGroup.attr("transform", "translate(0, 0)");
+
+        // udpate chart
+        sankey.nodeWidth((width > 800 ? 96 : width < 500 ? 48 : 64))
+          .nodePadding(width > 800 ? 24 : 12)
+          .size([width, height - marginBottom]);
+
+        // transform data
+        chartData = sankey(loadedData);
+
+        // draw chart
+        links = chartGroup
+          .selectAll(".link")
+            .data(chartData.links);
+        links.exit()
+          .remove();
+        links.enter()
+          .append("path")
+            .attr("class", function(d) { return d.party + " link"; })
+            .attr("d", d3.sankeyLinkHorizontal())
+            .attr("stroke-width", function(d) { return d.width; });
+        links.attr("d", d3.sankeyLinkHorizontal())
+          .attr("stroke-width", function(d) { return d.width; });
+
+        nodes = chartGroup
+          .selectAll(".node")
+            .data(chartData.nodes);
+        // remove vacant objects
+        nodes.exit().remove();
+        // initial objects layout
+        nodesEnter = nodes.enter()
+          .append("g")
+            .attr("class", function(d) { return d.party.replace(" ", "") + " node"; });
+        nodesEnter.append("rect")
+          .attr("x", function(d) { return d.x0; })
+          .attr("y", function(d) { return d.y0; })
+          .attr("height", function(d) { return d.y1 - d.y0; })
+          .attr("width", sankey.nodeWidth());
+        nodesEnter.append("text")
+          .classed("label", true)
+          .attr("x", function(d) { return d.x0 - (width > 800 ? 16 : 8); })
+          .attr("y", function(d) { return (d.y1 + d.y0) / 2 + (width > 800 ? 10 : 5); })
+          .text(function(d) { return d.name; })
+        .filter(function(d) { return d.x0 < width / 2; })
+          .attr("x", function(d) { return d.x1 + (width > 800 ? 16 : 8); })
+          .style("text-anchor", "start");
+        nodesEnter.append("text")
+          .classed("digit", true)
+          .attr("x", function(d) { return d.x0 + sankey.nodeWidth() / 2; })
+          .attr("y", function(d) { return (d.y1 + d.y0) / 2 + (width > 800 ? 10 : 5); })
+          .text(function(d) { return d3.format(".1%")(d.value); });
+        //  update existing objects
+        nodes.select("rect")
+          .attr("x", function(d) { return d.x0; })
+          .attr("y", function(d) { return d.y0; })
+          .attr("height", function(d) { return d.y1 - d.y0; })
+          .attr("width", sankey.nodeWidth());
+        nodes.selectAll("text")
+          .attr("y", function(d) { return (d.y1 + d.y0) / 2 + (width > 800 ? 10 : 5); });
+        nodes.select(".label")
+          .attr("x", function(d) { return d.x0 - (width > 800 ? 16 : 8); })
+        .filter(function(d) { return d.x0 < width / 2; })
+          .attr("x", function(d) { return d.x1 + (width > 800 ? 16 : 8); })
+          .style("text-anchor", "start");
+        nodes.select(".digit")
+          .attr("x", function(d) { return d.x0 + sankey.nodeWidth() / 2; });
+      }
+
+      function loadFrame(interactionObjects) {
+        interactionObjects.map(function(object) {
+          if (!loaded) {
+            if (document.fonts.status == "loaded") {
+              if (object.isIntersecting) {
+                resize();
+              }
+            } else {
+              document.fonts.onloadingdone = resize();
+            }
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

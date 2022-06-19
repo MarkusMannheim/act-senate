@@ -1,0 +1,35 @@
+code,PartyNm,PartyAb,btl,candidateName,first,ALP,LP,Pocock,exhausted
+A,Australian Labor Party,ALP,False,GALLAGHER Katy,0,0,0,0,0
+B,Sustainable Australia Party - Stop Overdevelopment / Corruption,SPP,False,ANGEL Joy,0,0,0,0,0
+C,United Australia Party,UAPP,False,SAVOULIDIS James,0,0,0,0,0
+D,Liberal,LP,False,SESELJA Zed,0,0,0,0,0
+E,David Pocock,DAVI,False,POCOCK David,0,0,0,0,0
+F,Kim for Canberra,KCBR,False,RUBENSTEIN Kim,0,0,0,0,0
+G,Australian Progressives,AUP,False,FAULKNER Therese,0,0,0,0,0
+H,The Greens,GRN,False,GORENG GORENG Tjanara,0,0,0,0,0
+I,Legalise Cannabis Australia,HMP,False,KATELARIS Andrew,0,0,0,0,0
+J,Animal Justice Party,AJP,False,del VALLE Yana,0,0,0,0,0
+K,Informed Medical Options Party,IMO,False,SIMMS Michael,0,0,0,0,0
+L,Australian Labor Party,ALP,True,GALLAGHER Katy,94761,94761,0,0,0
+M,Australian Labor Party,ALP,True,NORTHAM Maddy,471,346,23,100,2
+N,Sustainable Australia Party - Stop Overdevelopment / Corruption,SPP,True,ANGEL Joy,1558,446,348,681,83
+O,Sustainable Australia Party - Stop Overdevelopment / Corruption,SPP,True,HAYDON John,73,20,18,32,3
+P,United Australia Party,UAPP,True,SAVOULIDIS James,6027,813,2950,1799,465
+Q,United Australia Party,UAPP,True,PAGE Tracey,117,9,55,41,12
+R,Liberal,LP,True,SESELJA Zed,69673,0,69673,0,0
+S,Liberal,LP,True,LAM Kacey,1072,116,662,283,11
+T,David Pocock,DAVI,True,POCOCK David,60215,0,0,60215,0
+U,David Pocock,DAVI,True,DOUBE Clare,89,10,3,74,2
+V,Kim for Canberra,KCBR,True,RUBENSTEIN Kim,12463,3168,838,8304,153
+W,Kim for Canberra,KCBR,True,HUYNH Kim,150,39,24,86,1
+X,Australian Progressives,AUP,True,FAULKNER Therese,675,212,56,381,26
+Y,Australian Progressives,AUP,True,LIN Stephen,44,13,5,25,1
+Z,The Greens,GRN,True,GORENG GORENG Tjanara,28910,13546,1151,13823,390
+a,The Greens,GRN,True,CRUZ James,469,244,10,214,1
+b,Legalise Cannabis Australia,HMP,True,KATELARIS Andrew,4488,1354,840,1883,411
+c,Legalise Cannabis Australia,HMP,True,STANVIC Michelle,62,11,9,37,5
+d,Animal Justice Party,AJP,True,del VALLE Yana,1854,582,293,815,164
+e,Animal Justice Party,AJP,True,FAHIZ Jannah,38,8,4,23,3
+f,Informed Medical Options Party,IMO,True,SIMMS Michael,1377,169,374,619,215
+g,Informed Medical Options Party,IMO,True,LIDDICOAT Mary-Jane,81,9,22,36,14
+h,Independent,IND,True,LI Fuxin,550,240,94,192,24

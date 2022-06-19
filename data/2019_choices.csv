@@ -1,0 +1,25 @@
+code,PartyNm,PartyAb,btl,candidateName
+A,Liberal,LP,False,SESELJA Zed
+B,The Greens,GRN,False,KYBURZ Penny
+C,Anthony Pesec,Anthony Pesec,False,PESEC Anthony
+D,FRASER ANNING'S CONSERVATIVE NATIONAL PARTY,FACN,False,VAN DUREN Shane
+E,United Australia Party,UAPP,False,WALTER Peter
+F,Sustainable Australia,SPP,False,HAYDON John
+G,Australian Labor Party,ALP,False,GALLAGHER Katy
+H,Liberal,LP,True,SESELJA Zed
+I,Liberal,LP,True,GUNNING Robert
+J,The Greens,GRN,True,KYBURZ Penny
+K,The Greens,GRN,True,DAVIDSON Emma
+L,Anthony Pesec,Anthony Pesec,True,PESEC Anthony
+M,Anthony Pesec,Anthony Pesec,True,KENT Gary
+N,FRASER ANNING'S CONSERVATIVE NATIONAL PARTY,FACN,True,VAN DUREN Shane
+O,FRASER ANNING'S CONSERVATIVE NATIONAL PARTY,FACN,True,BIRKETT Scott
+P,United Australia Party,UAPP,True,WALTER Peter
+Q,United Australia Party,UAPP,True,HODGSON Rebecah Elen
+R,Sustainable Australia,SPP,True,HAYDON John
+S,Sustainable Australia,SPP,True,ANGEL Joy
+T,Australian Labor Party,ALP,True,GALLAGHER Katy
+U,Australian Labor Party,ALP,True,WAITES Nancy
+V,Independent,IND,True,HOUSTON Nick
+W,Independent,IND,True,COWTON Gary
+X,Christian Democratic Party (Fred Nile Group),CDP,True,KIM David

@@ -26,12 +26,12 @@
 
   <body>
     <div id="container">
-      <div id="header">How the votes flowed</div>
-      <div id="subhead">From first preferences to the final three candidates</div>
+      <!-- <div id="header">How the votes flowed</div> -->
+      <div id="subhead">First preferences &#129070; final three candidates</div>
       <svg id="chart">
         <g id="chartGroup"></g>
       </svg>
-      <div id="footer">Chart: Markus Mannheim | Source: Australian Electoral Commission</div>
+      <!-- <div id="footer">Chart: Markus Mannheim | Source: Australian Electoral Commission</div> -->
     </div>
 
     <script>
@@ -41,13 +41,38 @@
       footer = d3.select("#footer");
       chart = d3.select("#chart");
       chartGroup = d3.select("#chartGroup");
-      loadTarget = document.querySelector("#footer");
+      loadTarget = document.querySelector("#chart");
+
+      // party keys
+      names = {
+        "ALP": "Labor",
+        "SPP": "Sustainable Australia",
+        "UAPP": "United Australia",
+        "LP": "Liberal",
+        "DAVI": "Pocock",
+        "KCBR": "Kim for Canberra",
+        "AUP": "Progressives",
+        "GRN": "Greens",
+        "HMP": "Legalise Cannabis",
+        "AJP": "Animal Justice",
+        "IMO": "Informed Medical Options",
+        "IND": "ungrouped",
+        "Gallagher (elected)": null,
+        "Gallagher (quota)": "Gallagher (1st elected)",
+        "Seselja": "Seselja",
+        "Pocock": "Pocock (2nd elected)"
+      };
 
       // load the data
       d3.json("./data/sankey_data_2022.json")
         .then(function(data) {
           loadedData = data;
           totalVotes = 285217;
+          loadedData.nodes = loadedData.nodes
+            .map(function(d) {
+              if (Object.keys(names).includes(d.name)) d.name = names[d.name];
+              return d;
+            });
           loadedData.links = loadedData.links
             .map(function(d) {
               d.value = d.value / totalVotes;
@@ -80,8 +105,8 @@
         chartGroup.attr("transform", "translate(0, 0)");
 
         // udpate chart
-        sankey.nodeWidth((width > 800 ? 96 : width < 500 ? 48 : 64))
-          .nodePadding(width > 800 ? 24 : 12)
+        sankey.nodeWidth(width < 500 ? 48 : 64)
+          .nodePadding(12)
           .size([width, height - marginBottom]);
 
         // transform data
@@ -117,16 +142,15 @@
           .attr("width", sankey.nodeWidth());
         nodesEnter.append("text")
           .classed("label", true)
-          .attr("x", function(d) { return d.x0 - (width > 800 ? 16 : 8); })
-          .attr("y", function(d) { return (d.y1 + d.y0) / 2 + (width > 800 ? 10 : 5); })
-          .text(function(d) { return d.name; })
+          .attr("x", function(d) { return d.x0 - 8; })
+          .attr("y", function(d) { return (d.y1 + d.y0) / 2 + 5; })
         .filter(function(d) { return d.x0 < width / 2; })
-          .attr("x", function(d) { return d.x1 + (width > 800 ? 16 : 8); })
+          .attr("x", function(d) { return d.x1 + 8; })
           .style("text-anchor", "start");
         nodesEnter.append("text")
           .classed("digit", true)
           .attr("x", function(d) { return d.x0 + sankey.nodeWidth() / 2; })
-          .attr("y", function(d) { return (d.y1 + d.y0) / 2 + (width > 800 ? 10 : 5); })
+          .attr("y", function(d) { return (d.y1 + d.y0) / 2 + 5; })
           .text(function(d) { return d3.format(".1%")(d.value); });
         //  update existing objects
         nodes.select("rect")
@@ -135,14 +159,26 @@
           .attr("height", function(d) { return d.y1 - d.y0; })
           .attr("width", sankey.nodeWidth());
         nodes.selectAll("text")
-          .attr("y", function(d) { return (d.y1 + d.y0) / 2 + (width > 800 ? 10 : 5); });
+          .attr("y", function(d) { return (d.y1 + d.y0) / 2 + 5; });
         nodes.select(".label")
-          .attr("x", function(d) { return d.x0 - (width > 800 ? 16 : 8); })
+          .attr("x", function(d) { return d.x0 - 8; })
         .filter(function(d) { return d.x0 < width / 2; })
-          .attr("x", function(d) { return d.x1 + (width > 800 ? 16 : 8); })
+          .attr("x", function(d) { return d.x1 + 8; })
           .style("text-anchor", "start");
         nodes.select(".digit")
           .attr("x", function(d) { return d.x0 + sankey.nodeWidth() / 2; });
+        d3.selectAll(".node .label")
+          .text(function(d) {
+            if (d.name) {
+              if (width < 500) {
+                console.log(d.name);
+                let index = d.name.indexOf(" (");
+                console.log(index);
+                return index == -1 ? d.name : d.name.slice(0, d.name.indexOf(" ("));
+              } else {
+                return d.name;
+            }}
+          });
       }
 
       function loadFrame(interactionObjects) {

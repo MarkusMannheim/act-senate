@@ -34,7 +34,7 @@ body {
 }
 #subhead {
   margin-bottom: 14px;
-  font-family: ABCSansNovaLight, "Arial Narrow", Helvetica, sans-serif;
+  /* font-family: ABCSansNovaBlack, "Arial Black", Helvetica, sans-serif; */
 }
 #footer {
   font-family: ABCSansNovaLight, "Arial Narrow", Helvetica, sans-serif;
@@ -70,6 +70,9 @@ body {
 .DAVI rect {
   fill: #00a1c7;
 }
+.KCBR rect {
+  fill: #9359b3;
+}
 .UAPP rect {
   fill: #cc8500;
 }
@@ -99,37 +102,4 @@ body {
  #subhead {
    font-size: 15px;
  }
-}
-
-@media only screen and (min-width: 800px) {
-  body {
-    overflow: auto;
-  }
-  #container {
-    position: relative;
-    margin: 2rem auto;
-    width: 1000px;
-    height: 1600px;
-  }
-  #header {
-    margin-bottom: 20px;
-    font-size: 40px;
-  }
-  #subhead {
-    margin-bottom: 24px;
-    font-size: 2rem;
-  }
-  #footer {
-    margin-top: 20px;
-    font-size: 25px;
-  }
-  .node text {
-    font-size: 1.8rem;
-  }
-  .node .label {
-    text-shadow: 2px 2px 4px white;
-  }
-  .node .digit {
-    text-shadow: 2px 2px 5px #001533;
-  }
 }
